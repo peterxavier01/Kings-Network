@@ -2,7 +2,7 @@ import React from 'react'
 
 const bible = () => {
   return (
-    <div>bible</div>
+    <div>Bible Route</div>
   )
 }
 
