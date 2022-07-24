@@ -194,8 +194,8 @@ function Map() {
           <div className="flex flex-wrap justify-between">
             {distance && duration ? (
               <>
-                <p>Distance: {distance} </p>
-                <p>Duration: {`${duration} By Car`} </p>
+                <p className="text-sm text-slate-800 dark:text-gray-200">Distance: {distance} </p>
+                <p className="text-sm text-slate-800 dark:text-gray-200">Duration: {`${duration} By Car`} </p>
               </>
             ) : (
               ""
@@ -205,7 +205,7 @@ function Map() {
               className="rounded-lg flex justify-center items-center w-10 h-10 cursor-pointer"
               onClick={() => {
                 map.panTo(center);
-                map.setZoom(15);
+                map.setZoom(12);
               }}
             >
               <FaLocationArrow className="text-white" />
