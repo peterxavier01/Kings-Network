@@ -206,6 +206,7 @@ function Map() {
               onClick={() => {
                 map.panTo(center);
                 map.setZoom(12);
+                setSearchBox(false);
               }}
             >
               <FaLocationArrow className="text-white" />
