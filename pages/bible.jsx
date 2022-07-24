@@ -1,4 +1,5 @@
 import React from 'react'
+import privateRoute from '../components/privateRoute';
 
 const bible = () => {
   return (
@@ -6,4 +7,4 @@ const bible = () => {
   )
 }
 
-export default bible;
+export default privateRoute(bible);

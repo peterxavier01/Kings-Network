@@ -46,7 +46,7 @@ const Events = () => {
       >
         {articles.map((article) => (
           <SwiperSlide key={article.id}>
-            <div className="relative dark:bg-secondary-dark-bg bgr-white w-[290px] md:w-[350px] h-full mx-auto rounded-lg">
+            <div className="relative cursor-grab dark:bg-secondary-dark-bg bgr-white w-[290px] md:w-[350px] h-full mx-auto rounded-lg">
               <div className="rounded-lg rounded-b-none overflow-hidden">
                 <img
                   src={article.src}

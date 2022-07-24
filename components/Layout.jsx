@@ -1,11 +1,9 @@
 import React, { useEffect } from "react";
-import { useRouter } from "next/router";
 
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 import ThemeSettings from "../components/ThemeSettings";
 import Loader from "../components/Loader";
-import Login from "../pages/login";
 
 import { useStateContext } from "../contexts/ContextProvider";
 
@@ -31,8 +29,6 @@ const Layout = ({ children }) => {
     setCurrentMode,
   } = useStateContext();
 
-  const router = useRouter();
-
   useEffect(() => {
     const currentThemeColor = localStorage.getItem("colorMode");
     const currentThemeMode = localStorage.getItem("themeMode");
@@ -48,10 +44,6 @@ const Layout = ({ children }) => {
 
   // If only the useAuthState hook is used, loader will run indefinitely
   const [user, loading] = useAuthState(auth);
-
-  useEffect(() => {
-    if (!loading && !user) router.push("/login");
-  }, [user, loading]);
 
   useEffect(() => {
     if (user) {
@@ -105,12 +97,11 @@ const Layout = ({ children }) => {
             activeMenu ? "md:ml-72" : "flex-2"
           }`}
         >
-          <div className="fixed md:static bgr-white dark:bg-secondary-dark-bg navbar w-full">
+          <div className="fixed md:static bgr-white dark:bg-secondary-dark-bg nav-bar w-full">
             <Navbar />
           </div>
-          <div className="px-2 md:px-4">
+          <div className="px-2 md:px-2">
             {themeSettings && <ThemeSettings />}
-            {/* {user ? children : router.push("/login")} */}
             {children}
           </div>
         </div>

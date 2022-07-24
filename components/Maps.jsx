@@ -1,21 +1,42 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, {
+  useState,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+} from "react";
 import {
-  withGoogleMap,
-  withScriptjs,
   GoogleMap,
+  useJsApiLoader,
   Marker,
   InfoWindow,
   DirectionsRenderer,
-} from "react-google-maps";
-import { FaTimes, FaLocationArrow } from "react-icons/fa";
+  Autocomplete,
+} from "@react-google-maps/api";
 import { useStateContext } from "../contexts/ContextProvider";
-import parkData from "../data/skateboard-parks.json";
-import { Autocomplete } from "@react-google-maps/api";
+import { FaTimes, FaLocationArrow } from "react-icons/fa";
 
-import { mapStyles } from "../mapStyles";
+import { mapStyles, darkMapStyles, darkerMapStyles, lightMapStyles } from "../mapStyles";
+import parkData from "../data/skateboard-parks.json";
 
 function Map() {
-  const { searchBox, setSearhBox, currentColor } = useStateContext();
+  const { isLoaded } = useJsApiLoader({
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY,
+    libraries: ["places"],
+  });
+
+  const [map, setMap] = useState(/** @type google.maps.Map */ (null));
+  const center = useMemo(() => ({ lat: 45.4211, lng: -75.6903 }), []);
+
+  const onLoad = useCallback(function callback(map) {
+    setMap(map);
+  }, []);
+
+  const onUnmount = useCallback(function callback(map) {
+    setMap(null);
+  }, []);
+
+  const { searchBox, setSearchBox, currentColor } = useStateContext();
   const [selectedPark, setSelectedPark] = useState(null);
 
   const [directionsResponse, setDirectionsResponse] = useState(null);
@@ -42,15 +63,15 @@ function Map() {
         destination: destinationRef.current.value,
         travelMode: window.google.maps.TravelMode.DRIVING,
       });
-      setDirectionsResponse(results);
+      await setDirectionsResponse(results);
       setLoading(true);
-      setDistance(results.routes[0].legs[0].distance.text);
-      setDuration(results.routes[0].legs[0].duration.text);
+      await setDistance(results.routes[0].legs[0].distance.text);
+      await setDuration(results.routes[0].legs[0].duration.text);
     } catch (error) {
       setError(error);
     } finally {
       setLoading(false);
-      setSearhBox(!searchBox);
+      setSearchBox(!searchBox);
     }
   }
 
@@ -75,12 +96,21 @@ function Map() {
     };
   }, []);
 
-  return (
-    <div>
+  return isLoaded ? (
+    <div className="map relative">
       <GoogleMap
-        defaultZoom={10}
-        defaultCenter={{ lat: 45.4211, lng: -75.6903 }}
-        defaultOptions={{ styles: mapStyles }}
+        center={center}
+        zoom={10}
+        onLoad={onLoad}
+        onUnmount={onUnmount}
+        mapContainerClassName="map-container"
+        options={{
+          clickableIcons: false,
+          zoomControl: false,
+          mapTypeControl: false,
+          fullscreenControl: false,
+          styles: mapStyles,
+        }}
       >
         {parkData.features.map((park) => (
           <Marker
@@ -121,7 +151,7 @@ function Map() {
       </GoogleMap>
 
       {searchBox && (
-        <div className="absolute right-0 md:right-4 mx-2 md:m-0 top-4 bg-light-gray dark:bg-main-dark-bg p-4 rounded-lg">
+        <div className="absolute right-0 md:right-4 mx-2 md:m-0 top-28 md:top-4 bg-light-gray dark:bg-main-dark-bg p-4 rounded-lg">
           <div className="flex gap-2 flex-wrap">
             <div>
               <Autocomplete>
@@ -157,7 +187,7 @@ function Map() {
                 onClick={clearRoute}
                 className="text-red-600 dark:text-red-400 border p-1 text-xs rounded-md cursor-pointer"
               >
-                <FaTimes />
+                Clear
               </span>
             </div>
           </div>
@@ -173,6 +203,10 @@ function Map() {
             <span
               style={{ backgroundColor: currentColor }}
               className="rounded-lg flex justify-center items-center w-10 h-10 cursor-pointer"
+              onClick={() => {
+                map.panTo(center);
+                map.setZoom(15);
+              }}
             >
               <FaLocationArrow className="text-white" />
             </span>
@@ -187,20 +221,9 @@ function Map() {
         </div>
       )}
     </div>
+  ) : (
+    <></>
   );
 }
 
-const MapWrapped = withScriptjs(withGoogleMap(Map));
-
-export default function App() {
-  return (
-    <div style={{ height: "100vh" }} className="relative">
-      <MapWrapped
-        googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}`}
-        loadingElement={<div style={{ height: `100%` }} />}
-        containerElement={<div style={{ height: `100%` }} />}
-        mapElement={<div style={{ height: `100%` }} />}
-      />
-    </div>
-  );
-}
+export default React.memo(Map);

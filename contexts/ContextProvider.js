@@ -18,8 +18,6 @@ export const ContextProvider = ({ children }) => {
   const [themeSettings, setThemeSettings] = useState(false);
   const [searchBox, setSearchBox] = useState(false);
   const [user, setUser] = useState(undefined);
-  const chats = [];
-  const msg = [];
   const [chatBar, setChatBar] = useState(true);
 
   const setMode = (e) => {
@@ -78,8 +76,6 @@ export const ContextProvider = ({ children }) => {
         setSearchBox,
         user,
         setUser,
-        chats,
-        msg,
         chatBar,
         setChatBar,
         handleCloseChatbar,

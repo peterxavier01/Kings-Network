@@ -1,4 +1,5 @@
 import React from 'react'
+import privateRoute from '../components/privateRoute';
 
 const calendar = () => {
   return (
@@ -6,4 +7,4 @@ const calendar = () => {
   )
 }
 
-export default calendar;
+export default privateRoute(calendar);
