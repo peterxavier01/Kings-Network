@@ -25,6 +25,7 @@ import {
   lightMapStyles,
 } from "../mapStyles";
 import churchData from "../data/churches.json";
+import parkData from "../data/skateboard-parks.json";
 
 function Map() {
   const { isLoaded } = useJsApiLoader({
@@ -33,7 +34,8 @@ function Map() {
   });
 
   const [map, setMap] = useState(/** @type google.maps.Map */ (null));
-  const center = useMemo(() => ({ lat: 6.95, lng: 3.23333 }), []);
+  // const center = useMemo(() => ({ lat: 6.95, lng: 3.23333 }), []);
+  const center = useMemo(() => ({ lat: 45.421532, lng: -75.697189 }), []);
 
   const onLoad = useCallback(function callback(map) {
     setMap(map);
@@ -123,42 +125,39 @@ function Map() {
         {
           <MarkerClusterer>
             {(clusterer) => {
-              {
-                churchData.features.map((church) => (
-                  <Marker
-                    key={church.properties.CHURCH_ID}
-                    position={{
-                      lat: church.geometry.coordinates[0],
-                      lng: church.geometry.coordinates[1],
-                    }}
-                    clusterer={clusterer}
-                    onClick={() => {
-                      setSelectedChurch(church);
-                    }}
-                    icon={{
-                      url: `../church.svg`,
-                      scaledSize: new window.google.maps.Size(25, 25),
-                    }}
-                  />
-                ));
-              }
+              parkData.features.map((church) => (
+                <Marker
+                  key={church.properties.PARK_ID}
+                  position={{
+                    lat: church.geometry.coordinates[1],
+                    lng: church.geometry.coordinates[0],
+                  }}
+                  clusterer={clusterer}
+                  onClick={() => {
+                    setSelectedChurch(church);
+                  }}
+                  icon={{
+                    url: `../../church.svg`,
+                    scaledSize: new window.google.maps.Size(25, 25),
+                  }}
+                />
+              ));
             }}
           </MarkerClusterer>
         }
-
         {selectedChurch && (
           <InfoWindow
             onCloseClick={() => {
               setSelectedChurch(null);
             }}
             position={{
-              lat: selectedChurch.geometry.coordinates[0],
-              lng: selectedChurch.geometry.coordinates[1],
+              lat: selectedChurch.geometry.coordinates[1],
+              lng: selectedChurch.geometry.coordinates[0],
             }}
           >
             <div>
               <h2>{selectedChurch.properties.NAME}</h2>
-              <p>{selectedChurch.properties.DESCRIPTION}</p>
+              <p>{selectedChurch.properties.DESCRIPTIO}</p>
             </div>
           </InfoWindow>
         )}
