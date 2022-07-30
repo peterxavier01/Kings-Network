@@ -136,7 +136,7 @@ function Map() {
                       setSelectedChurch(church);
                     }}
                     icon={{
-                      url: `../../church.svg`,
+                      url: `../church.svg`,
                       scaledSize: new window.google.maps.Size(25, 25),
                     }}
                   />
