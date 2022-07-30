@@ -1,0 +1,108 @@
+{
+  "features": [
+    {
+      "type": "Churches",
+      "properties": {
+        "CHURCH_ID": 12,
+        "NAME": " Christ Embassy Church LCC3",
+        "ADDRESS": "Annex,21/23 Ize Iyamu Street,Oregun,Ikeja",
+        "DESCRIPTION": "Flat asphalt surface, 5 components"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [6.60733, 3.36338]
+      }
+    },
+    {
+      "type": "Churches",
+      "properties": {
+        "CHURCH_ID": 14,
+        "NAME": "Christ Embassy, Lagos Virtual Zone",
+        "ADDRESS": "Loveworld Convocational Arena (LCA), No. 8 Billings Way, Oregun 101233, Ikeja",
+        "DESCRIPTION": "Flat asphalt surface, 5 components"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [6.950000, 3.23333]
+      }
+    },
+    {
+      "type": "Churches",
+      "properties": {
+        "CHURCH_ID": 16,
+        "NAME": "Christ Embassy Lagos Zone 2 Main Church",
+        "ADDRESS": "51-53 Kudirat Abiola Way, Ikeja",
+        "DESCRIPTION": "Flat asphalt surface, 5 components"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [6.5968, 3.36854]
+      }
+    },
+    {
+      "type": "Churches",
+      "properties": {
+        "CHURCH_ID": 18,
+        "NAME": "Christ Embassy Jeddo",
+        "ADDRESS": "Lane, beside Regent School, 7 Christ Embassy Cl, Jeddo 102214",
+        "DESCRIPTION": "Flat asphalt surface, 5 components"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [5.592013, 5.70852]
+      }
+    },
+    {
+      "type": "Churches",
+      "properties": {
+        "CHURCH_ID": 20,
+        "NAME": "Christ Embassy Church",
+        "ADDRESS": "Ikosi, 11 Aladelola Street, Kosofe",
+        "DESCRIPTION": "Flat asphalt surface, 5 components"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [6.59849, 3.38149]
+      }
+    },
+    {
+      "type": "Churches",
+      "properties": {
+        "CHURCH_ID": 22,
+        "NAME": "Christ Embassy",
+        "ADDRESS": "G52F+W4F, Ojo 102101",
+        "DESCRIPTION": "Flat asphalt surface, 5 components"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [6.45706, 3.21242]
+      }
+    },
+    {
+      "type": "Churches",
+      "properties": {
+        "CHURCH_ID": 24,
+        "NAME": "Christ Embassy lagos Zone 4",
+        "ADDRESS": "U Turn Bus Stop, Abeokuta Expy, Ifako-Ijaiye",
+        "DESCRIPTION": "Flat asphalt surface, 5 components"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [6.65295, 3.29905]
+      }
+    },
+    {
+      "type": "Churches",
+      "properties": {
+        "CHURCH_ID": 26,
+        "NAME": "Christ Embassy Lekki Church",
+        "ADDRESS": "CFGR+FHX, Lekki Penninsula II 106104, Lekki",
+        "DESCRIPTION": "Flat asphalt surface, 5 components"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [6.44638, 3.47216]
+      }
+    }
+  ]
+}

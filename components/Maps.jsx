@@ -12,12 +12,19 @@ import {
   InfoWindow,
   DirectionsRenderer,
   Autocomplete,
+  Circle,
+  MarkerClusterer,
 } from "@react-google-maps/api";
 import { useStateContext } from "../contexts/ContextProvider";
 import { FaTimes, FaLocationArrow } from "react-icons/fa";
 
-import { mapStyles, darkMapStyles, darkerMapStyles, lightMapStyles } from "../mapStyles";
-import parkData from "../data/skateboard-parks.json";
+import {
+  mapStyles,
+  darkMapStyles,
+  darkerMapStyles,
+  lightMapStyles,
+} from "../mapStyles";
+import churchData from "../data/churches.json";
 
 function Map() {
   const { isLoaded } = useJsApiLoader({
@@ -26,7 +33,7 @@ function Map() {
   });
 
   const [map, setMap] = useState(/** @type google.maps.Map */ (null));
-  const center = useMemo(() => ({ lat: 45.4211, lng: -75.6903 }), []);
+  const center = useMemo(() => ({ lat: 6.95, lng: 3.23333 }), []);
 
   const onLoad = useCallback(function callback(map) {
     setMap(map);
@@ -37,7 +44,8 @@ function Map() {
   }, []);
 
   const { searchBox, setSearchBox, currentColor } = useStateContext();
-  const [selectedPark, setSelectedPark] = useState(null);
+  const [selectedChurch, setSelectedChurch] = useState(null);
+  const [home, setHome] = useState(null);
 
   const [directionsResponse, setDirectionsResponse] = useState(null);
   const [distance, setDistance] = useState("");
@@ -86,7 +94,7 @@ function Map() {
   useEffect(() => {
     const listener = (e) => {
       if (e.key === "Escape") {
-        setSelectedPark(null);
+        setSelectedChurch(null);
       }
     };
     window.addEventListener("keydown", listener);
@@ -112,41 +120,59 @@ function Map() {
           styles: mapStyles,
         }}
       >
-        {parkData.features.map((park) => (
-          <Marker
-            key={park.properties.PARK_ID}
-            position={{
-              lat: park.geometry.coordinates[1],
-              lng: park.geometry.coordinates[0],
+        {
+          <MarkerClusterer>
+            {(clusterer) => {
+              {
+                churchData.features.map((church) => (
+                  <Marker
+                    key={church.properties.CHURCH_ID}
+                    position={{
+                      lat: church.geometry.coordinates[0],
+                      lng: church.geometry.coordinates[1],
+                    }}
+                    clusterer={clusterer}
+                    onClick={() => {
+                      setSelectedChurch(church);
+                    }}
+                    icon={{
+                      url: `../../church.svg`,
+                      scaledSize: new window.google.maps.Size(25, 25),
+                    }}
+                  />
+                ));
+              }
             }}
-            onClick={() => {
-              setSelectedPark(park);
-            }}
-            icon={{
-              url: `../../church2.svg`,
-              scaledSize: new window.google.maps.Size(25, 25),
-            }}
-          />
-        ))}
+          </MarkerClusterer>
+        }
 
-        {selectedPark && (
+        {selectedChurch && (
           <InfoWindow
             onCloseClick={() => {
-              setSelectedPark(null);
+              setSelectedChurch(null);
             }}
             position={{
-              lat: selectedPark.geometry.coordinates[1],
-              lng: selectedPark.geometry.coordinates[0],
+              lat: selectedChurch.geometry.coordinates[0],
+              lng: selectedChurch.geometry.coordinates[1],
             }}
           >
             <div>
-              <h2>{selectedPark.properties.NAME}</h2>
-              <p>{selectedPark.properties.DESCRIPTIO}</p>
+              <h2>{selectedChurch.properties.NAME}</h2>
+              <p>{selectedChurch.properties.DESCRIPTION}</p>
             </div>
           </InfoWindow>
         )}
         {directionsResponse && (
-          <DirectionsRenderer directions={directionsResponse} />
+          <DirectionsRenderer
+            directions={directionsResponse}
+            options={{
+              polylineOptions: {
+                zIndex: 50,
+                strokeColor: "#1976D2",
+                strokeWeight: 5,
+              },
+            }}
+          />
         )}
       </GoogleMap>
 
@@ -194,8 +220,12 @@ function Map() {
           <div className="flex flex-wrap justify-between">
             {distance && duration ? (
               <>
-                <p className="text-sm text-slate-800 dark:text-gray-200">Distance: {distance} </p>
-                <p className="text-sm text-slate-800 dark:text-gray-200">Duration: {`${duration} By Car`} </p>
+                <p className="text-sm text-slate-800 dark:text-gray-200">
+                  Distance: {distance}{" "}
+                </p>
+                <p className="text-sm text-slate-800 dark:text-gray-200">
+                  Duration: {`${duration} By Car`}{" "}
+                </p>
               </>
             ) : (
               ""
