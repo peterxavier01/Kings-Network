@@ -7,16 +7,16 @@ import React, {
 } from "react";
 import {
   GoogleMap,
-  useJsApiLoader,
   DirectionsRenderer,
   Autocomplete,
   Circle,
   MarkerF,
   InfoWindowF,
+  useLoadScript,
 } from "@react-google-maps/api";
 import Geocode from "react-geocode";
 import { useStateContext } from "../contexts/ContextProvider";
-import { FaTimes, FaLocationArrow } from "react-icons/fa";
+import { FaLocationArrow } from "react-icons/fa";
 
 import {
   mapStyles,
@@ -28,7 +28,7 @@ import churchData from "../data/churches.json";
 
 function Map() {
   const [libraries] = useState(["places"]);
-  const { isLoaded } = useJsApiLoader({
+  const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY,
     libraries,
   });
@@ -40,16 +40,19 @@ function Map() {
 
   // const [map, setMap] = useState(/** @type google.maps.Map */ (null));
   const mapRef = useRef();
-  const [destination, setDestination] = useState("");
-  const center = useMemo(() => ({ lat: 6.95, lng: 3.23333 }), []);
+  const [mapInstance, setMapInstance] = useState(null);
+  // const center = { lat: 6.95, lng: 3.23333 };
+  const center = useMemo(() => ({ lat: 6.379377, lng: 5.612128 }), []);
   // const center = useMemo(() => ({ lat: 45.421532, lng: -75.697189 }), []);
 
   const onLoad = useCallback(function callback(map) {
     mapRef.current = map;
+    setMapInstance(map);
   }, []);
 
   const onUnmount = useCallback(function callback(map) {
     mapRef.current = null;
+    setMapInstance(null);
   }, []);
 
   const { searchBox, setSearchBox, currentColor } = useStateContext();
@@ -113,24 +116,15 @@ function Map() {
     Geocode.fromAddress(originRef?.current?.value).then(
       (response) => {
         const { lat, lng } = response.results[0].geometry.location;
-        setHome({ lat, lng });
-        home && mapRef.current?.panTo(new window.google.maps.LatLng(lat, lng));
+        setHome({...home, lat, lng });
+        // home && mapRef?.current?.panTo((home));
+        home && mapInstance?.panTo(home);
       },
       (error) => {
         console.error(error);
       }
     );
-  }, []);
-
-  let myStyles = [
-    {
-      featureType: "poi",
-      elementType: "labels",
-      stylers: [{ visibility: "off" }],
-    },
-  ];
-
-  // if (home) console.log(home);
+  }, [home]);
 
   return isLoaded ? (
     <div className="map relative">
@@ -145,7 +139,7 @@ function Map() {
           zoomControl: false,
           mapTypeControl: false,
           fullscreenControl: false,
-          styles: [myStyles, mapStyles],
+          styles: mapStyles,
         }}
       >
         {home && (
@@ -179,7 +173,7 @@ function Map() {
               />
             ))}
 
-            <Circle center={home} radius={15000} options={home} />
+            <Circle center={home} radius={15000} options={closeOptions} />
             <Circle center={home} radius={30000} options={middleOptions} />
             <Circle center={home} radius={45000} options={farOptions} />
           </>
@@ -199,7 +193,7 @@ function Map() {
               <h2 className="p-2 font-bold text-md">
                 {selectedChurch.properties.NAME}
               </h2>
-              <p>{selectedChurch.properties.DESCRIPTION}</p>
+              <p>{selectedChurch.properties.ADDRESS}</p>
             </div>
           </InfoWindowF>
         )}
@@ -225,7 +219,7 @@ function Map() {
               <Autocomplete onPlaceChanged={() => getGeoCode()}>
                 <input
                   type="text"
-                  placeholder="Home"
+                  placeholder="Enter your address"
                   ref={originRef}
                   className="outline-none border dark:bg-light-gray rounded-md p-2 text-slate-800"
                 />

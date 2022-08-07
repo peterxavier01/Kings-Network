@@ -75,7 +75,7 @@ const Login = () => {
   };
 
   return (
-    <div className="signup flex flex-col justify-center items-center mb-4  min-h-screen md:min-h-[80vh] px-2">
+    <div className="signup flex flex-col justify-center items-center mb-4 min-h-screen md:min-h-[80vh] px-2">
       <form className="bg-white p-4 rounded-lg md:w-400 w-full">
         <h2 className="text-center font-semibold text-2xl md:text-4xl mb-4 text-gray-800">
           Login

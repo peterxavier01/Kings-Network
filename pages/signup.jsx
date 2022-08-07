@@ -57,7 +57,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="signup mb-4 flex flex-col justify-center items-center min-h-[50vh] md:min-h-[80vh] px-2">
+    <div className="signup mb-4 flex flex-col justify-center items-center min-h-screen md:min-h-[80vh] px-2">
       <form className="bg-white p-4 rounded-lg md:w-400 w-full">
         <h2 className="text-center font-semibold text-2xl md:text-4xl mb-4 text-gray-800">
           Sign up

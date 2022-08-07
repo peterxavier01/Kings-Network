@@ -23,7 +23,7 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [6.950000, 3.23333]
+        "coordinates": [6.95, 3.23333]
       }
     },
     {
@@ -102,6 +102,162 @@
       "geometry": {
         "type": "Point",
         "coordinates": [6.44638, 3.47216]
+      }
+    },
+    {
+      "type": "Churches",
+      "properties": {
+        "CHURCH_ID": 28,
+        "NAME": "Christ Embassy Erediauwa",
+        "ADDRESS": "1 Christ Embassy Ln, Erediauwa St, Off Ekenwan Road, 300261, Benin City",
+        "DESCRIPTION": "Flat asphalt surface, 5 components"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [6.32939, 5.59338]
+      }
+    },
+    {
+      "type": "Churches",
+      "properties": {
+        "CHURCH_ID": 30,
+        "NAME": "Christ Embassy New Benin",
+        "ADDRESS": "Ivbiye Street, Use 300102, Benin City",
+        "DESCRIPTION": "Flat asphalt surface, 5 components"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [6.353816, 5.622838]
+      }
+    },
+    {
+      "type": "Churches",
+      "properties": {
+        "CHURCH_ID": 32,
+        "NAME": "Christ Embassy Ikpoba- Hill 1",
+        "ADDRESS": "Benin-Auchi Road, Aduwawa, Ikpoba-Hill, 300104, Benin City",
+        "DESCRIPTION": "Flat asphalt surface, 5 components"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [6.38402, 5.71428]
+      }
+    },
+    {
+      "type": "Churches",
+      "properties": {
+        "CHURCH_ID": 34,
+        "NAME": "Christ Embassy Country Home",
+        "ADDRESS": "36 Country Home Rd, Oka 300102, Benin City",
+        "DESCRIPTION": "Flat asphalt surface, 5 components"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [6.273594, 5.625094]
+      }
+    },
+    {
+      "type": "Churches",
+      "properties": {
+        "CHURCH_ID": 36,
+        "NAME": "Christ Embassy Greater Grace Church",
+        "ADDRESS": "22 2nd Ugbor Rd, Oka 300102, Benin City",
+        "DESCRIPTION": "Flat asphalt surface, 5 components"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [6.298739, 5.61287]
+      }
+    },
+    {
+      "type": "Churches",
+      "properties": {
+        "CHURCH_ID": 38,
+        "NAME": "Christ Embassy Giwa Amu",
+        "ADDRESS": "8J53+PJ2, Oka 300102, Benin City",
+        "DESCRIPTION": "Flat asphalt surface, 5 components"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [6.309481, 5.603974]
+      }
+    },
+    {
+      "type": "Churches",
+      "properties": {
+        "CHURCH_ID": 40,
+        "NAME": "Christ Embassy Oka church",
+        "ADDRESS": "7MPC+RH4, Avbiama 300105, Benin City",
+        "DESCRIPTION": "Flat asphalt surface, 5 components"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [6.287157, 5.671443]
+      }
+    },
+    {
+      "type": "Churches",
+      "properties": {
+        "CHURCH_ID": 42,
+        "NAME": "Christ Embassy Campus Ministry BDPA",
+        "ADDRESS": "CJ24+Q26, Uselu 300103, Benin City",
+        "DESCRIPTION": "Flat asphalt surface, 5 components"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [6.40221, 5.605048]
+      }
+    },
+    {
+      "type": "Churches",
+      "properties": {
+        "CHURCH_ID": 44,
+        "NAME": "Christ Embassy (WEALTHY PLACE)",
+        "ADDRESS": "18 Igbineweka St, Okhokhugbo 300103, Benin City",
+        "DESCRIPTION": "Flat asphalt surface, 5 components"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [6.357544, 5.590109]
+      }
+    },
+    {
+      "type": "Churches",
+      "properties": {
+        "CHURCH_ID": 46,
+        "NAME": "Christ Embassy Youth Church",
+        "ADDRESS": "48, Police Station Road By Twins Plaza Hostel Ekosodin",
+        "DESCRIPTION": "Flat asphalt surface, 5 components"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [6.410646, 5.621484]
+      }
+    },
+    {
+      "type": "Churches",
+      "properties": {
+        "CHURCH_ID": 48,
+        "NAME": "Christ Embassy Campground",
+        "ADDRESS": "Benin Sapele Rd, 300105, Benin City",
+        "DESCRIPTION": "Flat asphalt surface, 5 components"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [6.21881, 5.638841]
+      }
+    },
+    {
+      "type": "Churches",
+      "properties": {
+        "CHURCH_ID": 50,
+        "NAME": "Christ Embassy Ugbowo 2",
+        "ADDRESS": "Nepa Office, Uselu 300103, Benin City",
+        "DESCRIPTION": "Flat asphalt surface, 5 components"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [6.379377, 5.612128]
       }
     }
   ]
